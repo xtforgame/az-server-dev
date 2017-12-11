@@ -11,20 +11,29 @@ class ServiceState {
     this.depFuncName = depFuncName;
     this.Class = service.constructor;
     this.name = this.Class.$name;
-    this.resolving = false;
+    this.depResolving = false;
     this.promiseFunc = null;
+    this.promise = null;
   }
 
-  preparePromiseFunc(){
+  run = (containerInterface) => {
+    if(this.promise){
+      return this.promise;
+    }
+
+    return this.promise = this.service[this.depFuncName](containerInterface);
+  };
+
+  getPromiseFunc = () => {
     if(this.promiseFunc){
       return this.promiseFunc;
     }
 
-    if(this.resolving){
+    if(this.depResolving){
       throw new Error('Circular dependencies occured :' + this.name);
     }
 
-    this.resolving = true;
+    this.depResolving = true;
 
     this.depPromiseFuncs = (this.Class[`$${this.depFuncName}Deps`] || [])
     .map(dep => {
@@ -32,15 +41,15 @@ class ServiceState {
       if(!depService){
         throw new Error('Service not Found :' + dep);
       }
-      return depService.preparePromiseFunc();
+      return depService.run;
     });
 
-    this.resolving = false;
+    this.depResolving = false;
 
     this.promiseFunc = (containerInterface) => Promise.all(this.depPromiseFuncs.map(depPromiseFunc => depPromiseFunc(containerInterface)))
-    .then(() => this.service[this.depFuncName](containerInterface));
+    .then(() => this.run(containerInterface));
     return this.promiseFunc;
-  }
+  };
 }
 
 export default class Azioc {
@@ -86,7 +95,7 @@ export default class Azioc {
       serviceStateArray.push(serviceState);
     });
 
-    return serviceStateArray.map(serviceState => serviceState.preparePromiseFunc());
+    return serviceStateArray.map(serviceState => serviceState.getPromiseFunc());
   }
 
   start(){
