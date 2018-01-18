@@ -1,7 +1,7 @@
 FROM node:7-onbuild
 
-RUN mkdir -p /usr/volumns/src /usr/volumns/share /usr/volumns/output
-VOLUME ["/usr/volumns/src", "/usr/volumns/share", "/usr/volumns/output"]
+RUN mkdir -p /usr/volumes/src /usr/volumes/share /usr/volumes/output
+VOLUME ["/usr/volumes/src", "/usr/volumes/share", "/usr/volumes/output"]
 
 COPY docker-cmd.sh /usr/src/app/
 

@@ -1,6 +1,6 @@
 #!/bin/bash
-mkdir -p /usr/volumns/src
-cp -rf /usr/volumns/src/* /usr/src/app
+mkdir -p /usr/volumes/src
+cp -rf /usr/volumes/src/* /usr/src/app
 
 #npm start
 npm run build

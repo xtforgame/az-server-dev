@@ -8,7 +8,7 @@ services:
     container_name: webserver-${CONTAINER_POSTFIX:-default}
 
     volumes:
-      - ".:/usr/volumns/src/"
+      - ".:/usr/volumes/src/"
 
     command: bash docker-cmd.sh
 
