@@ -1,4 +1,4 @@
-import { ServiceBase } from '../../azioc';
+import ServiceBase from '../ServiceBase';
 import {forceSync} from '../../core/config';
 import credentials from './credentials';
 

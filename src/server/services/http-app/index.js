@@ -1,4 +1,4 @@
-import { ServiceBase } from '../../azioc';
+import ServiceBase from '../ServiceBase';
 import { httpPort, httpsPort } from '../../core/config';
 import Koa from 'koa';
 import createRouterClass from 'generic-router';

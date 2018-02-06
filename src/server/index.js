@@ -1,4 +1,4 @@
-import Azioc from './azioc';
+import Azldi from 'azldi';
 import { httpPort, httpsPort } from './core/config';
 // ============================================
 import EnvCfg from './services/env-cfg';
@@ -8,14 +8,16 @@ import {
   runningMode,
 } from './common/core/config';
 
-const ioc = new Azioc();
+const ioc = new Azldi();
 ioc.register([
   EnvCfg,
   HttpApp,
   RouterManager,
 ]);
 
-ioc.start()
+ioc.digest();
+
+ioc.runAsync('start')
   .then(() => {
     console.log(`======= Running in the ${runningMode} mode =======`);
     console.log(`Express listening on http port ${httpPort}`);

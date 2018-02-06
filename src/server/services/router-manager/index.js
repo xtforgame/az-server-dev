@@ -1,4 +1,4 @@
-import { ServiceBase } from '../../azioc';
+import ServiceBase from '../ServiceBase';
 //========================================
 import MainRouter from '../../routers/main-router';
 
