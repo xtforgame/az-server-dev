@@ -31,7 +31,7 @@
     "azldi": "git+https://github.com/xtforgame/azldi.git#v0.1.0",
     "az-restful-helpers": "git+https://github.com/xtforgame/az-restful-helpers.git#v0.1.0",
     "generic-router": "git+https://github.com/xtforgame/generic-router#v1.2.0",
-    "koa": "^2.3.0",
+    "koa": "^2.5.0",
     "koa-bodyparser": "^4.2.0"
   },
   "devDependencies": {
