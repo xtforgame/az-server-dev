@@ -1,5 +1,5 @@
 import ServiceBase from '../ServiceBase';
-import { httpPort, httpsPort } from '../../core/config';
+import { httpPort, httpsPort } from 'config';
 import Koa from 'koa';
 import createRouterClass from 'generic-router';
 import bodyParser from 'koa-bodyparser';
@@ -53,7 +53,35 @@ export default class HttpApp extends ServiceBase {
   onStart(){
     //======================================================
     return new Promise(resolve => {
-      runServer(this.app, this.credentials, resolve, httpPort, httpsPort);
+      runServer(this.app, this.credentials, (httpServer, httpsServer) => resolve({httpServer, httpsServer}), httpPort, httpsPort)
+    })
+    .then(({httpServer, httpsServer}) => {
+      this.httpServer = httpServer;
+      this.httpsServer = httpsServer;
+    });
+  }
+
+  onDestroy(){
+    return new Promise(resolve => {
+      if(!this.httpServer){
+        return ;
+      }
+      this.httpServer.shutdown(() => {
+        this.httpServer = null;
+        resolve();
+      });
+      return new Promise(resolve => {
+        if(!this.httpsServer){
+          return ;
+        }
+        this.httpsServer.shutdown(() => {
+          this.httpsServer = null;
+          resolve();
+        });
+      });
+    })
+    .then(() => {
+      console.log('Everything is cleanly shutdown.');
     });
   }
 }

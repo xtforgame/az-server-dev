@@ -1,0 +1,40 @@
+{
+  "presets": ["es2015"],
+  "plugins": [
+    "transform-decorators-legacy",
+    "transform-class-properties",
+    "transform-object-rest-spread"
+  ],
+  "env": {
+    "development": {
+      "plugins": [
+        ["module-resolver", {
+          "alias": {
+            "~": "./src/common",
+            "config": "./src/common/core/config"
+          }
+        }]
+      ]
+    },
+    "production": {
+      "plugins": [
+        ["module-resolver", {
+          "alias": {
+            "~": "./src/common",
+            "config": "./src/common/core/config"
+          }
+        }]
+      ]
+    },
+    "test": {
+      "plugins": [
+        ["module-resolver", {
+          "alias": {
+            "~": "./src/common",
+            "config": "./src/common/core/config"
+          }
+        }]
+      ]
+    }
+  }
+}

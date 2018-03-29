@@ -4,7 +4,7 @@ import path from 'path';
 import fs from 'fs';
 import {
   credentialFiles,
-} from '../../core/config';
+} from 'config';
 
 let basePath = credentialFiles.basePath;
 let keyFilename = credentialFiles.key || 'key.pem';

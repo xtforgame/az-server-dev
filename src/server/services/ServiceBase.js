@@ -8,4 +8,14 @@ export default class ServiceBase {
       }
     });
   }
+
+  destroy(containerInterface) {
+    return new Promise((resolve, reject) => {
+      try {
+        return resolve(this.onDestroy && this.onDestroy(containerInterface));
+      } catch (e) {
+        return reject(e);
+      }
+    });
+  }
 }

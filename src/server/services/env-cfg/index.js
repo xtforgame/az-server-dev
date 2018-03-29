@@ -1,5 +1,4 @@
 import ServiceBase from '../ServiceBase';
-import {forceSync} from '../../core/config';
 import credentials from './credentials';
 
 export default class EnvCfg extends ServiceBase {
