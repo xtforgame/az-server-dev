@@ -20,8 +20,8 @@
     "lint-fix": "eslint --fix --ext .jsx,.js ./src",
     "build": "cross-env NODE_ENV=production gulp server:build && cross-env NODE_ENV=production gulp server:build:extras",
     "start": "cross-env NODE_ENV=development gulp server:watch:dev",
-    "test": "eslint ./test/server && cross-env NODE_ENV=test mocha --compilers js:babel-core/register ./test/server/**/*.spec.js",
-    "test-watch": "eslint ./test/server && cross-env NODE_ENV=test mocha --watch ./test --watch-extensions js,jsx --compilers js:babel-core/register ./test/server/**/*.spec.js"
+    "test": "eslint ./test/server && cross-env NODE_ENV=test mocha --compilers js:babel-core/register './test/server/**/*.spec.js'",
+    "test-watch": "eslint ./test/server && cross-env NODE_ENV=test mocha --watch ./test --watch-extensions js,jsx --compilers js:babel-core/register './test/server/**/*.spec.js'"
   },
   "license": "MIT",
   "engines": {
