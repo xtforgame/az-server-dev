@@ -9,9 +9,9 @@ please DO NOT put any sensitive information here.
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 */
 
-let runningMode = 'Production';
+/* eslint-disable import/prefer-default-export */
+const runningMode = 'Production';
 
 export {
   runningMode,
-}
-
+};

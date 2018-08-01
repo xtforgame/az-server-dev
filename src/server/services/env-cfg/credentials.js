@@ -6,17 +6,17 @@ import {
   credentialFiles,
 } from 'config';
 
-let basePath = credentialFiles.basePath;
-let keyFilename = credentialFiles.key || 'key.pem';
-let certFilename = credentialFiles.cert || 'cert.pem';
-let caFilename = credentialFiles.ca;
+const {
+  basePath,
+  key: keyFilename = 'key.pem',
+  cert: certFilename = 'cert.pem',
+  ca: caFilename,
+} = credentialFiles;
 
-// let key = fs.readFileSync(path.join(__dirname, '..', '..', 'ssl', 'privatekey.pem'), 'utf8');
-// let cert = fs.readFileSync(path.join(__dirname, '..', '..', 'ssl', 'certificate.pem'), 'utf8');
-let credentials = {
+const credentials = {
   key: keyFilename && fs.readFileSync(path.join(basePath, keyFilename), 'utf8'),
   cert: certFilename && fs.readFileSync(path.join(basePath, certFilename), 'utf8'),
   ca: caFilename && fs.readFileSync(path.join(basePath, caFilename), 'utf8'),
 };
 
-export {credentials as default};
+export { credentials as default };

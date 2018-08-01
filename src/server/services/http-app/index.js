@@ -1,43 +1,42 @@
-import ServiceBase from '../ServiceBase';
+/* eslint-disable no-console */
 import { httpPort, httpsPort } from 'config';
 import Koa from 'koa';
 import createRouterClass from 'generic-router';
 import bodyParser from 'koa-bodyparser';
-import { runServer } from './http-server';
 import { RestfulError } from 'az-restful-helpers';
 import http from 'http';
+import runServer from './runServer';
+import ServiceBase from '../ServiceBase';
 
-let methods = http.METHODS.map(function lowerCaseMethod (method) {
-  return method.toLowerCase();
-});
+const methods = http.METHODS.map(method => method.toLowerCase());
 
 export default class HttpApp extends ServiceBase {
   static $name = 'httpApp';
+
   static $type = 'service';
+
   static $inject = ['envCfg'];
 
-  constructor(envCfg){
+  constructor(envCfg) {
     super();
     this.app = new Koa();
     // prevent any error to be sent to user
-    this.app.use((ctx, next) => {
-      return next().catch((err) => {
-        if(err instanceof RestfulError){
-          return err.koaThrow(ctx);
-        }
-        // console.log('err.restfulError :', err.restfulError);
-        if(!err.status){
-          console.error(err);
-          console.error(err.stack);
-          ctx.throw(500);
-        }
-        throw err;
-      });
-    });
+    this.app.use((ctx, next) => next().catch((err) => {
+      if (err instanceof RestfulError) {
+        return err.koaThrow(ctx);
+      }
+      // console.log('err.restfulError :', err.restfulError);
+      if (!err.status) {
+        console.error(err);
+        console.error(err.stack);
+        ctx.throw(500);
+      }
+      throw err;
+    }));
     this.app.use(bodyParser());
-    /*let credentials = */this.credentials = envCfg.credentials;
+    /* let credentials = */this.credentials = envCfg.credentials;
 
-    let KoaRouter = createRouterClass({
+    const KoaRouter = createRouterClass({
       methods,
     });
     this.router = new KoaRouter();
@@ -46,43 +45,38 @@ export default class HttpApp extends ServiceBase {
     .use(this.router.allowedMethods());
 
     this.appConfig = {
-      router: this.router/*, app: this.app, azLrApp, credentials*/
+      router: this.router, /* , app: this.app, azLrApp, credentials */
     };
   }
 
-  onStart(){
-    //======================================================
-    return new Promise(resolve => {
-      runServer(this.app, this.credentials, (httpServer, httpsServer) => resolve({httpServer, httpsServer}), httpPort, httpsPort)
+  onStart() {
+    //= =====================================================
+    return new Promise((resolve) => {
+      const cb = (httpServer, httpsServer) => resolve({ httpServer, httpsServer });
+      runServer(this.app, this.credentials, cb, httpPort, httpsPort);
     })
-    .then(({httpServer, httpsServer}) => {
+    .then(({ httpServer, httpsServer }) => {
       this.httpServer = httpServer;
       this.httpsServer = httpsServer;
     });
   }
 
-  onDestroy(){
-    return new Promise(resolve => {
-      if(!this.httpServer){
-        return ;
-      }
-      this.httpServer.shutdown(() => {
+  onDestroy() {
+    let p = Promise.resolve();
+    if (this.httpServer) {
+      p = p.then(() => new Promise(resolve => this.httpServer.shutdown(() => {
         this.httpServer = null;
         resolve();
-      });
-      return new Promise(resolve => {
-        if(!this.httpsServer){
-          return ;
-        }
-        this.httpsServer.shutdown(() => {
-          this.httpsServer = null;
-          resolve();
-        });
-      });
-    })
-    .then(() => {
+      })));
+    }
+    if (this.httpsServer) {
+      p = p.then(() => new Promise(resolve => this.httpsServer.shutdown(() => {
+        this.httpsServer = null;
+        resolve();
+      })));
+    }
+    return p.then(() => {
       console.log('Everything is cleanly shutdown.');
     });
   }
 }
-

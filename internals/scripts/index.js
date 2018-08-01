@@ -1,8 +1,7 @@
-import gulp from 'gulp';
-import path from 'path';
 import {
   serverTasks,
 } from 'az-gulp-env-lite';
 
 import gulpConfig from '../../.azdata/gulp-config';
+
 serverTasks.addTasks(gulpConfig);
