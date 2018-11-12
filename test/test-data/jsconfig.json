@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "baseUrl": "../../",
+    "paths": {
+      "~/*": ["./test/test-data/*"],
+      "common": ["src/common"],
+      "common/*": ["src/common/*"],
+      "server": ["src/server"],
+      "server/*": ["src/server/*"],
+      "test-utils": ["./test/test-utils"],
+      "test-utils/*": ["./test/test-utils/*"]
+    },
+  }
+}

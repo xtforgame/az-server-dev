@@ -1,0 +1,46 @@
+{
+  "presets": ["env"],
+  "plugins": [
+    "transform-decorators-legacy",
+    "transform-class-properties",
+    "transform-object-rest-spread"
+  ],
+  "env": {
+    "development": {
+      "plugins": [
+        ["module-resolver", {
+          "alias": {
+            "~": "./src/test-utils",
+            "common": "./src/common",
+            "server": "./src/server",
+            "test-data": "./src/test-data"
+          }
+        }]
+      ]
+    },
+    "production": {
+      "plugins": [
+        ["module-resolver", {
+          "alias": {
+            "~": "./src/test-utils",
+            "common": "./src/common",
+            "server": "./src/server",
+            "test-data": "./src/test-data"
+          }
+        }]
+      ]
+    },
+    "test": {
+      "plugins": [
+        ["module-resolver", {
+          "alias": {
+            "~": "./src/test-utils",
+            "common": "./src/common",
+            "server": "./src/server",
+            "test-data": "./src/test-data"
+          }
+        }]
+      ]
+    }
+  }
+}

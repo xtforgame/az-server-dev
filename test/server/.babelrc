@@ -16,7 +16,9 @@
           "alias": {
             "~": "./src/test/server",
             "common": "./src/common",
-            "server": "./src/server"
+            "server": "./src/server",
+            "test-utils": "./src/test-utils",
+            "test-data": "./src/test-data"
           }
         }]
       ]
@@ -27,7 +29,9 @@
           "alias": {
             "~": "./src/test/server",
             "common": "./src/common",
-            "server": "./src/server"
+            "server": "./src/server",
+            "test-utils": "./src/test-utils",
+            "test-data": "./src/test-data"
           }
         }]
       ]
@@ -38,7 +42,9 @@
           "alias": {
             "~": "./src/test/server",
             "common": "./src/common",
-            "server": "./src/server"
+            "server": "./src/server",
+            "test-utils": "./src/test-utils",
+            "test-data": "./src/test-data"
           }
         }]
       ]
