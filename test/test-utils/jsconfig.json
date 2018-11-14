@@ -3,10 +3,10 @@
     "baseUrl": "../../",
     "paths": {
       "~/*": ["./test/test-utils/*"],
-      "common": ["src/common"],
-      "common/*": ["src/common/*"],
-      "server": ["src/server"],
-      "server/*": ["src/server/*"],
+      "common": ["./src/common"],
+      "common/*": ["./src/common/*"],
+      "server": ["./src/server"],
+      "server/*": ["./src/server/*"],
       "test-data": ["./test/test-data"],
       "test-data/*": ["./test/test-data/*"]
     },

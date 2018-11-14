@@ -2,11 +2,11 @@
   "compilerOptions": {
     "baseUrl": "../../",
     "paths": {
-      "~/*": ["test/server/*"],
-      "common": ["src/common"],
-      "common/*": ["src/common/*"],
-      "server": ["src/server"],
-      "server/*": ["src/server/*"],
+      "~/*": ["./test/server/*"],
+      "common": ["./src/common"],
+      "common/*": ["./src/common/*"],
+      "server": ["./src/server"],
+      "server/*": ["./src/server/*"],
       "test-utils": ["./test/test-utils"],
       "test-utils/*": ["./test/test-utils/*"],
       "test-data": ["./test/test-data"],

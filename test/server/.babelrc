@@ -14,7 +14,7 @@
       "plugins": [
         ["module-resolver", {
           "alias": {
-            "~": "./src/test/server",
+            "~": "./test/server",
             "common": "./src/common",
             "server": "./src/server",
             "test-utils": "./src/test-utils",
@@ -27,7 +27,7 @@
       "plugins": [
         ["module-resolver", {
           "alias": {
-            "~": "./src/test/server",
+            "~": "./test/server",
             "common": "./src/common",
             "server": "./src/server",
             "test-utils": "./src/test-utils",
@@ -40,7 +40,7 @@
       "plugins": [
         ["module-resolver", {
           "alias": {
-            "~": "./src/test/server",
+            "~": "./test/server",
             "common": "./src/common",
             "server": "./src/server",
             "test-utils": "./src/test-utils",
