@@ -11,7 +11,11 @@ var config = {
       entry: {
         dir: 'src/common',
         js: {
-          glob: '**/*.js',
+          glob: '**/*.{js,ts}',
+        },
+        ts: {
+          tsconfig: 'tsconfig.json',
+          glob: '**/*.ts',
         },
       },
       output: {
@@ -29,7 +33,11 @@ var config = {
       entry: {
         dir: 'src/server',
         js: {
-          glob: '**/*.js',
+          glob: '**/*.{js,ts}',
+        },
+        ts: {
+          tsconfig: 'tsconfig.json',
+          glob: '**/*.ts',
         },
       },
       output: {
@@ -37,6 +45,16 @@ var config = {
           dir: 'dist/server',
           js: {
             filename: 'index.js',
+          },
+        },
+        //dev: {},
+        //dist: {},
+      },
+      options: {
+        default: {
+          babel: {},
+          nodemon: {
+            ext: 'js,html,ts',
           },
         },
         //dev: {},
