@@ -11,6 +11,6 @@
       "test-utils/*": ["./test/test-utils/*"],
       "test-data": ["./test/test-data"],
       "test-data/*": ["./test/test-data/*"]
-    },
+    }
   }
 }

@@ -1,15 +1,16 @@
 /* eslint-disable no-console */
 import Azldi from 'azldi';
 import { httpPort, httpsPort } from 'config';
+import {
+  runningMode,
+} from 'common/config';
 // ============================================
 import EnvCfg from '~/services/env-cfg';
 import HttpApp from '~/services/http-app';
 import RouterManager from '~/services/router-manager';
-import {
-  runningMode,
-} from 'common/core/config';
 
 class Server {
+  ioc : any;
   constructor() {
     this.ioc = new Azldi();
     this.ioc.register([

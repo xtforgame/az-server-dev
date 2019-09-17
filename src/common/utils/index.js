@@ -4,7 +4,17 @@ export function defaultToPromiseFunc(_, value) {
 
 export function toSeqPromise(inArray, toPrmiseFunc = defaultToPromiseFunc) {
   return inArray.reduce(
-    (prev, curr, index, array) => prev.then(() => toPrmiseFunc(prev, curr, index, array)), Promise.resolve()
+    (prev, curr, index, array) => prev.then(
+      () => toPrmiseFunc(prev, curr, index, array)
+    ), Promise.resolve()
+  );
+}
+
+export function promiseReduce(inArray, toPrmiseFunc = defaultToPromiseFunc, startValue) {
+  return inArray.reduce(
+    (prev, curr, index, array) => prev.then(
+      result => toPrmiseFunc(result, curr, index, array)
+    ), Promise.resolve(startValue)
   );
 }
 

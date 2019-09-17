@@ -14,7 +14,7 @@ var config = {
           glob: '**/*.{js,ts}',
         },
         ts: {
-          tsconfig: 'tsconfig.json',
+          tsconfig: 'tsconfig.build.json',
           glob: '**/*.ts',
         },
       },
@@ -36,7 +36,7 @@ var config = {
           glob: '**/*.{js,ts}',
         },
         ts: {
-          tsconfig: 'tsconfig.json',
+          tsconfig: 'tsconfig.build.json',
           glob: '**/*.ts',
         },
       },

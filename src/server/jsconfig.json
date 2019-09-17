@@ -1,9 +1,12 @@
 {
   "compilerOptions": {
-    "baseUrl": "../",
+    "baseUrl": "../../",
     "paths": {
-      "~/*": ["server/*"],
-      "common/*": ["common/*"]
-    },
+      "*": ["./node_modules/*"],
+      "~/*": ["./src/server/*"],
+      "common/*": ["./src/common/*"],
+      "config": ["./src/server/configs/development"],
+      "common/config": ["./src/common/configs/development"]
+    }
   }
 }

@@ -9,6 +9,6 @@
       "server/*": ["./src/server/*"],
       "test-data": ["./test/test-data"],
       "test-data/*": ["./test/test-data/*"]
-    },
+    }
   }
 }

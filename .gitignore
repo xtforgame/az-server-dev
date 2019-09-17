@@ -1,5 +1,4 @@
 **/secrets
 /node_modules
 /dist
-/src/server/ssl/production
 .DS_Store

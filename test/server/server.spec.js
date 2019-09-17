@@ -3,11 +3,11 @@
 import chai from 'chai';
 import https from 'https';
 import sinon from 'sinon';
-import { httpsPort } from 'server/core/config';
+import { httpsPort } from 'server-config';
 import Server from 'server';
 import {
   runningMode,
-} from 'common/core/config';
+} from 'common-config';
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 

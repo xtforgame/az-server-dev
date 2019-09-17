@@ -1,12 +1,9 @@
+/* eslint-disable no-console */
 export default class ServiceBase {
   start(containerInterface) {
-    return new Promise((resolve, reject) => {
-      try {
-        return resolve(this.onStart && this.onStart(containerInterface));
-      } catch (e) {
-        return reject(e);
-      }
-    });
+    console.log('==== start service ==== :', this.constructor.$name);
+    return Promise.resolve()
+    .then(() => this.onStart && this.onStart(containerInterface));
   }
 
   destroy(containerInterface) {

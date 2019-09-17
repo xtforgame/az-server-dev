@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable no-console, import/no-extraneous-dependencies */
 import { httpPort, httpsPort } from 'config';
 import Koa from 'koa';
 import createRouterClass from 'generic-router';
@@ -20,6 +20,7 @@ export default class HttpApp extends ServiceBase {
   constructor(envCfg) {
     super();
     this.app = new Koa();
+    this.app.proxy = !!process.env.KOA_PROXY_ENABLED;
     // prevent any error to be sent to user
     this.app.use((ctx, next) => next().catch((err) => {
       if (err instanceof RestfulError) {
@@ -33,7 +34,11 @@ export default class HttpApp extends ServiceBase {
       }
       throw err;
     }));
-    this.app.use(bodyParser());
+    this.app.use(bodyParser({
+      formLimit: '10mb',
+      jsonLimit: '10mb',
+      textLimit: '10mb',
+    }));
     /* let credentials = */this.credentials = envCfg.credentials;
 
     const KoaRouter = createRouterClass({
@@ -50,7 +55,7 @@ export default class HttpApp extends ServiceBase {
   }
 
   onStart() {
-    //= =====================================================
+    // ======================================================
     return new Promise((resolve) => {
       const cb = (httpServer, httpsServer) => resolve({ httpServer, httpsServer });
       runServer(this.app, this.credentials, cb, httpPort, httpsPort);
